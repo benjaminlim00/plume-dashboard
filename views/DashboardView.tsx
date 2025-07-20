@@ -1,93 +1,27 @@
 "use client"
 
 import Image from "next/image"
-import { useAccount, useReadContract } from "wagmi"
 import { useRouter } from "next/navigation"
-import { erc20Abi, formatUnits } from "viem"
+import { useAccount } from "wagmi"
+import { useTransactions } from "../lib/useTransactions"
 import { useVaults } from "../lib/useVaults"
-
-const MOCK_TRANSACTIONS = [
-  {
-    transactionId: "0x3cdd...a0b7",
-    from: "0x5e3f...9b4d",
-    to: "0x8631...0bfD",
-    amount: "1.50",
-    date: "Jul 22, 2025, 4:45 PM",
-  },
-  {
-    transactionId: "0x86bf...f9a8",
-    from: "0x772e...c6d1",
-    to: "0x8631...0bfD",
-    amount: "1.75",
-    date: "Jun 15, 2025, 2:30 PM",
-  },
-  {
-    transactionId: "0x6b3c...e4d2",
-    from: "0x8631...0bfD",
-    to: "0x58de...b5ef",
-    amount: "2.00",
-    date: "May 10, 2025, 11:15 AM",
-  },
-  {
-    transactionId: "0x5af1...d3e9",
-    from: "0x8631...0bfD",
-    to: "0x47fa...c9de",
-    amount: "1.25",
-    date: "Apr 24, 2025, 9:41 AM",
-  },
-  {
-    transactionId: "0x5af1...d3b8",
-    from: "0x8631...0bfD",
-    to: "0x47fa...c9de",
-    amount: "1.25",
-    date: "Apr 23, 2025, 9:41 AM",
-  },
-]
 
 const DashboardView: React.FC = () => {
   const { address, isConnected } = useAccount()
   const router = useRouter()
 
   const {
+    vaultLoading,
+    totalTokenBalance,
+    totalBalanceUSD,
+    balanceLoading,
+    vaultError,
     addresses,
-    prices,
-    isLoading: vaultsLoading,
-    error: vaultsError,
+    decimals,
   } = useVaults()
 
-  // Read nALPHA decimals /  nTBILL decimals - same as its both NEST token
-  const { data: decimals } = useReadContract({
-    address: addresses.nALPHA as `0x${string}`,
-    abi: erc20Abi,
-    functionName: "decimals",
-    query: {
-      enabled: !!addresses.nALPHA,
-    },
-  })
-
-  // Read nALPHA balance
-  const { data: alphaBalance, isLoading: alphaLoading } = useReadContract({
-    address: addresses.nALPHA as `0x${string}`,
-    abi: erc20Abi,
-    functionName: "balanceOf",
-    args: [address!],
-    query: {
-      enabled: !!address && !!addresses.nALPHA,
-    },
-  })
-
-  // Read nTBILL balance
-  const { data: treasuryBalance, isLoading: treasuryLoading } = useReadContract(
-    {
-      address: addresses.nTBILL as `0x${string}`,
-      abi: erc20Abi,
-      functionName: "balanceOf",
-      args: [address!],
-      query: {
-        enabled: !!address && !!addresses.nTBILL,
-      },
-    }
-  )
+  const { transactions, transactionsLoading, transactionsError } =
+    useTransactions(address, addresses, decimals)
 
   if (!isConnected || !address) {
     router.push("/")
@@ -95,7 +29,7 @@ const DashboardView: React.FC = () => {
   }
 
   // Show loading spinner while fetching vault data
-  if (vaultsLoading) {
+  if (vaultLoading) {
     return (
       <div className="flex h-screen items-center justify-center bg-[#F9FAFB]">
         <div className="flex flex-col items-center gap-4">
@@ -107,7 +41,7 @@ const DashboardView: React.FC = () => {
   }
 
   // Show error if vault data failed to load
-  if (vaultsError) {
+  if (vaultError) {
     return (
       <div className="flex h-screen items-center justify-center bg-[#F9FAFB]">
         <div className="text-center">
@@ -123,32 +57,6 @@ const DashboardView: React.FC = () => {
   const formatAddress = (addr: string) => {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`
   }
-
-  // Calculate total token balance (sum of both vaults)
-  const totalRawBalance = (alphaBalance || 0n) + (treasuryBalance || 0n)
-  const totalTokenBalance = decimals
-    ? formatUnits(totalRawBalance, decimals)
-    : "0"
-
-  // Calculate total USD value using live prices
-  const totalBalanceUSD =
-    prices.nALPHA &&
-    prices.nTBILL &&
-    decimals &&
-    alphaBalance &&
-    treasuryBalance
-      ? (
-          parseFloat(formatUnits(alphaBalance, decimals)) * prices.nALPHA +
-          parseFloat(formatUnits(treasuryBalance, decimals)) * prices.nTBILL
-        ).toFixed(2)
-      : "0"
-
-  const balanceLoading =
-    alphaLoading ||
-    treasuryLoading ||
-    !decimals ||
-    !prices.nALPHA ||
-    !prices.nTBILL
 
   return (
     <div className="min-h-screen bg-[#F9FAFB] px-2 md:px-0">
@@ -224,48 +132,77 @@ const DashboardView: React.FC = () => {
         >
           <h3 className="mb-6 font-medium">Transaction history</h3>
 
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[600px]">
-              <thead>
-                <tr>
-                  <th className="w-1/5 py-3 text-left text-sm font-medium text-[#71717A]">
-                    Transaction
-                  </th>
-                  <th className="w-1/5 py-3 text-left text-sm font-medium text-[#71717A]">
-                    From
-                  </th>
-                  <th className="w-1/5 py-3 text-left text-sm font-medium text-[#71717A]">
-                    To
-                  </th>
-                  <th className="w-1/5 py-3 text-left text-sm font-medium text-[#71717A]">
-                    Amount
-                  </th>
-                  <th className="w-1/5 py-3 text-left text-sm font-medium text-[#71717A]">
-                    Date & Time
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {MOCK_TRANSACTIONS.map((txn, index) => (
-                  <tr key={index}>
-                    <td className="py-3 text-sm text-[#09090B] underline">
-                      {txn.transactionId}
-                    </td>
-                    <td className="py-3 text-sm text-[#09090B] underline">
-                      {txn.from}
-                    </td>
-                    <td className="py-3 text-sm text-[#09090B] underline">
-                      {txn.to}
-                    </td>
-                    <td className="py-3 text-sm text-[#09090B]">
-                      {txn.amount}
-                    </td>
-                    <td className="py-3 text-sm text-[#09090B]">{txn.date}</td>
+          {transactionsLoading ? (
+            <div className="flex items-center justify-center py-8">
+              <div className="flex items-center gap-3">
+                <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600"></div>
+                <span className="text-sm text-[#71717A]">
+                  Loading transactions...
+                </span>
+              </div>
+            </div>
+          ) : transactionsError ? (
+            <div className="py-8 text-center">
+              <p className="text-sm text-red-600">
+                Failed to load transactions
+              </p>
+              <p className="mt-1 text-xs text-[#71717A]">
+                Please try refreshing the page
+              </p>
+            </div>
+          ) : transactions.length === 0 ? (
+            <div className="py-8 text-center">
+              <p className="text-sm text-[#71717A]">No transactions found</p>
+              <p className="mt-1 text-xs text-[#71717A]">
+                Your transaction history will appear here
+              </p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[600px]">
+                <thead>
+                  <tr>
+                    <th className="w-1/5 py-3 text-left text-sm font-medium text-[#71717A]">
+                      Transaction
+                    </th>
+                    <th className="w-1/5 py-3 text-left text-sm font-medium text-[#71717A]">
+                      From
+                    </th>
+                    <th className="w-1/5 py-3 text-left text-sm font-medium text-[#71717A]">
+                      To
+                    </th>
+                    <th className="w-1/5 py-3 text-left text-sm font-medium text-[#71717A]">
+                      Amount
+                    </th>
+                    <th className="w-1/5 py-3 text-left text-sm font-medium text-[#71717A]">
+                      Date & Time
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {transactions.map((txn, index) => (
+                    <tr key={`${txn.transactionId}-${index}`}>
+                      <td className="py-3 text-sm text-[#09090B] underline">
+                        {txn.transactionId}
+                      </td>
+                      <td className="py-3 text-sm text-[#09090B] underline">
+                        {txn.from}
+                      </td>
+                      <td className="py-3 text-sm text-[#09090B] underline">
+                        {txn.to}
+                      </td>
+                      <td className="py-3 text-sm text-[#09090B]">
+                        {parseFloat(txn.amount).toFixed(4)}
+                      </td>
+                      <td className="py-3 text-sm text-[#09090B]">
+                        {txn.date}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
     </div>

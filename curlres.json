@@ -1,0 +1,222 @@
+[
+  {
+    "vaultStatus": "Live",
+    "slug": "nest-alpha-vault",
+    "image": "/images/vaults/nest-egg-vault.svg",
+    "name": "Nest Alpha Vault",
+    "description": "Stable yield from high quality RWAs",
+    "tvl": 14376602,
+    "formattedTvl": "$14M",
+    "apy": 0.06544288434204848,
+    "price": 1.008345,
+    "hasBoostedRewards": true,
+    "formattedApy": "6.54%",
+    "featuredAssets": [
+      {
+        "title": "Blackstone",
+        "image": "/images/assets/blackstone.svg",
+        "comingSoon": true
+      },
+      { "title": "Simplify ETFs", "image": "/images/assets/simplify-etfs.svg" },
+      { "title": "Invesco", "image": "/images/assets/invesco.svg" },
+      { "title": "Black Opal", "image": "/images/assets/black-opal.svg" },
+      { "title": "Carlyle", "image": "/images/assets/carlyle.svg" },
+      {
+        "title": "Kasu",
+        "image": "/images/assets/kasu.svg",
+        "comingSoon": true
+      },
+      { "title": "Mineral Vault", "image": "/images/assets/mineral-vault.svg" },
+      { "title": "M0", "image": "/images/assets/m.svg" }
+    ],
+    "formattedCooldownDays": "10",
+    "estimatedApy": 0.105,
+    "ethereum": {
+      "contractAddress": "0x593cCcA4c4bf58b7526a4C164cEEf4003C6388db"
+    },
+    "plume": { "contractAddress": "0x593cCcA4c4bf58b7526a4C164cEEf4003C6388db" }
+  },
+  {
+    "vaultStatus": "Live",
+    "slug": "nest-basis-vault",
+    "image": "/images/vaults/nest-basis-vault.svg",
+    "name": "Nest Basis Vault",
+    "description": "Delta-neutral yield from crypto basis",
+    "tvl": 21605123,
+    "formattedTvl": "$22M",
+    "apy": 0.05522276395399106,
+    "price": 1.00789,
+    "hasBoostedRewards": true,
+    "formattedApy": "5.52%",
+    "featuredAssets": [
+      { "title": "Superstate", "image": "/images/assets/superstate.svg" },
+      { "title": "Midas", "image": "/images/assets/midas.svg" }
+    ],
+    "formattedCooldownDays": "10",
+    "showLiveApy": true,
+    "ethereum": {
+      "contractAddress": "0x11113ff3a60c2450f4b22515cb760417259ee94b"
+    },
+    "plume": { "contractAddress": "0x11113ff3a60c2450f4b22515cb760417259ee94b" }
+  },
+  {
+    "vaultStatus": "Live",
+    "slug": "nest-treasury-vault",
+    "image": "/images/vaults/nest-treasury-vault.svg",
+    "name": "Nest Treasury Vault",
+    "description": "Institutional-grade yield from treasuries",
+    "tvl": 24934628,
+    "formattedTvl": "$25M",
+    "apy": 0.0343864531273097,
+    "price": 1.006876,
+    "formattedApy": "3.44%",
+    "featuredAssets": [
+      { "title": "Superstate", "image": "/images/assets/superstate.svg" },
+      { "title": "Anemoy", "image": "/images/assets/anemoy.svg" },
+      { "title": "Centrifuge", "image": "/images/assets/centrifuge.svg" },
+      { "title": "M0", "image": "/images/assets/m.svg" }
+    ],
+    "formattedCooldownDays": "10",
+    "estimatedApy": 0.05,
+    "showLiveApy": true,
+    "ethereum": {
+      "contractAddress": "0xe72fe64840f4ef80e3ec73a1c749491b5c938cb9"
+    },
+    "plume": { "contractAddress": "0xe72fe64840f4ef80e3ec73a1c749491b5c938cb9" }
+  },
+  {
+    "vaultStatus": "Live",
+    "slug": "nest-credit-vault",
+    "image": "/images/vaults/nest-credit-vault.svg",
+    "name": "Nest Credit Vault",
+    "description": "Institutional-grade public & private credit",
+    "tvl": 474085,
+    "formattedTvl": "$474K",
+    "apy": 0.08763095961538901,
+    "price": 1.008359,
+    "hasBoostedRewards": true,
+    "formattedApy": "8.76%",
+    "featuredAssets": [
+      { "title": "Superstate", "image": "/images/assets/superstate.svg" },
+      {
+        "title": "Goldfinch Prime",
+        "image": "/images/assets/goldfinch-prime.svg"
+      },
+      { "title": "Midas", "image": "/images/assets/midas.svg" },
+      { "title": "Anemoy", "image": "/images/assets/anemoy.svg" },
+      { "title": "Centrifuge", "image": "/images/assets/centrifuge.svg" },
+      { "title": "M0", "image": "/images/assets/m.svg" }
+    ],
+    "formattedCooldownDays": "10",
+    "estimatedApy": 0.07,
+    "ethereum": {
+      "contractAddress": "0xa5f78b2a0ab85429d2dfbf8b60abc70f4cec066c"
+    },
+    "plume": { "contractAddress": "0xa5f78b2a0ab85429d2dfbf8b60abc70f4cec066c" }
+  },
+  {
+    "vaultStatus": "Live",
+    "slug": "nest-elixir-vault",
+    "image": "/images/vaults/nest-elixir-vault.svg",
+    "name": "Nest Elixir Vault",
+    "description": "Institutional-grade DeFi deUSD",
+    "tvl": 20434681,
+    "formattedTvl": "$20M",
+    "apy": 0.051783910665426314,
+    "price": 1.027994,
+    "formattedApy": "5.18%",
+    "featuredAssets": [
+      { "title": "BlackRock", "image": "/images/assets/blackrock.svg" },
+      {
+        "title": "Hamilton Lane",
+        "image": "/images/assets/hamiliton-lane.svg"
+      },
+      { "title": "Apollo", "image": "/images/assets/apollo.svg" },
+      { "title": "Elixir", "image": "/images/assets/elixir.svg" }
+    ],
+    "formattedCooldownDays": "7",
+    "showLiveApy": true,
+    "ethereum": {
+      "contractAddress": "0x9fbC367B9Bb966a2A537989817A088AFCaFFDC4c"
+    },
+    "plume": { "contractAddress": "0x9fbC367B9Bb966a2A537989817A088AFCaFFDC4c" }
+  },
+  {
+    "vaultStatus": "ComingSoon",
+    "slug": "nest-payfi-vault",
+    "image": "/images/vaults/nest-payfi-vault.svg",
+    "name": "Nest PayFi Vault",
+    "description": "Bridging dollars and DeFi with PYUSD",
+    "tvl": 13054,
+    "formattedTvl": "$13K",
+    "apy": 0.14,
+    "price": 1.00006,
+    "isEstimatedApy": true,
+    "formattedApy": "14%",
+    "featuredAssets": [
+      { "title": "PayUSD", "image": "/images/assets/payusd.svg" },
+      { "title": "Kasu", "image": "/images/assets/kasu.svg" }
+    ],
+    "formattedCooldownDays": "10",
+    "estimatedApy": 0.14,
+    "ethereum": {
+      "contractAddress": "0xb52b090837a035f93a84487e5a7d3719c32aa8a9"
+    },
+    "plume": { "contractAddress": "0xb52b090837a035f93a84487e5a7d3719c32aa8a9" }
+  },
+  {
+    "vaultStatus": "ComingSoon",
+    "slug": "nest-etf-vault",
+    "image": "/images/vaults/nest-etf-vault.svg",
+    "name": "Nest ETF Vault",
+    "description": "High-quality institutional ETFs onchain",
+    "tvl": 18483,
+    "formattedTvl": "$18K",
+    "apy": 0.088,
+    "price": 1.000123,
+    "isEstimatedApy": true,
+    "hasBoostedRewards": true,
+    "formattedApy": "8.8%",
+    "featuredAssets": [
+      { "title": "Simplify ETFs", "image": "/images/assets/simplify-etfs.svg" },
+      {
+        "title": "Blackstone",
+        "image": "/images/assets/blackstone.svg",
+        "comingSoon": true
+      },
+      { "title": "Plural Energy", "image": "/images/assets/plural-energy.svg" }
+    ],
+    "formattedCooldownDays": "10",
+    "estimatedApy": 0.088,
+    "ethereum": {
+      "contractAddress": "0xdeA736937d464d288eC80138bcd1a2E109A200e3"
+    },
+    "plume": { "contractAddress": "0xdeA736937d464d288eC80138bcd1a2E109A200e3" }
+  },
+  {
+    "vaultStatus": "ComingSoon",
+    "slug": "nest-institutional-vault",
+    "image": "/images/vaults/nest-institutional-vault.svg",
+    "name": "Nest Institutional Vault",
+    "description": "Institutional MMF and basis trading",
+    "tvl": 21286,
+    "formattedTvl": "$21K",
+    "apy": 0.07627695163005699,
+    "price": 1.010206,
+    "formattedApy": "7.63%",
+    "featuredAssets": [
+      { "title": "Open Trade", "image": "/images/assets/open-trade.svg" },
+      { "title": "Invesco", "image": "/images/assets/invesco.svg" },
+      { "title": "Superstate", "image": "/images/assets/superstate.svg" },
+      { "title": "Anemoy", "image": "/images/assets/anemoy.svg" },
+      { "title": "Centrifuge", "image": "/images/assets/centrifuge.svg" },
+      { "title": "M0", "image": "/images/assets/m.svg" }
+    ],
+    "formattedCooldownDays": "10",
+    "estimatedApy": 0.07,
+    "ethereum": {
+      "contractAddress": "0xbfc5770631641719cd1cf809d8325b146aed19de"
+    },
+    "plume": { "contractAddress": "0xbfc5770631641719cd1cf809d8325b146aed19de" }
+  }
+]
