@@ -5,7 +5,16 @@ import { useRouter } from "next/navigation"
 import { useAccount } from "wagmi"
 import { useTransactions } from "../lib/useTransactions"
 import { useVaults } from "../lib/useVaults"
+import { plume } from "../lib/wagmi"
 import { useEffect } from "react"
+
+const formatAddress = (addr: string) => {
+  return `${addr.slice(0, 6)}...${addr.slice(-4)}`
+}
+
+const getExplorerUrl = (type: "tx" | "address", value: string) => {
+  return `${plume.blockExplorers.default.url}/${type}/${value}`
+}
 
 const DashboardView: React.FC = () => {
   const { address, isConnected } = useAccount()
@@ -58,10 +67,6 @@ const DashboardView: React.FC = () => {
         </div>
       </div>
     )
-  }
-
-  const formatAddress = (addr: string) => {
-    return `${addr.slice(0, 6)}...${addr.slice(-4)}`
   }
 
   return (
@@ -180,14 +185,35 @@ const DashboardView: React.FC = () => {
                 <tbody>
                   {transactions.map((txn, index) => (
                     <tr key={`${txn.transactionId}-${index}`}>
-                      <td className="py-3 text-sm text-[#09090B] underline">
-                        {txn.transactionId}
+                      <td className="py-3 text-sm text-[#09090B]">
+                        <a
+                          href={getExplorerUrl("tx", txn.transactionId)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="cursor-pointer underline hover:text-blue-600"
+                        >
+                          {formatAddress(txn.transactionId)}
+                        </a>
                       </td>
-                      <td className="py-3 text-sm text-[#09090B] underline">
-                        {txn.from}
+                      <td className="py-3 text-sm text-[#09090B]">
+                        <a
+                          href={getExplorerUrl("address", txn.from)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="cursor-pointer underline hover:text-blue-600"
+                        >
+                          {formatAddress(txn.from)}
+                        </a>
                       </td>
-                      <td className="py-3 text-sm text-[#09090B] underline">
-                        {txn.to}
+                      <td className="py-3 text-sm text-[#09090B]">
+                        <a
+                          href={getExplorerUrl("address", txn.to)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="cursor-pointer underline hover:text-blue-600"
+                        >
+                          {formatAddress(txn.to)}
+                        </a>
                       </td>
                       <td className="py-3 text-sm text-[#09090B]">
                         {parseFloat(txn.amount).toFixed(4)}

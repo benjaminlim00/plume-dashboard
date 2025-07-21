@@ -37,7 +37,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the application.
 ### Available Scripts
 
 - `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build production version  
+- `npm run build` - Build production version
 - `npm run lint` - Run ESLint for code quality checks
 - `npm run format` - Format code with Prettier
 - `npm run test` - Run Jest tests

@@ -103,9 +103,9 @@ export const useTransactions = (
               })
 
               transactions.push({
-                transactionId: `${log.transactionHash.slice(0, 6)}...${log.transactionHash.slice(-4)}`,
-                from: `${log.args.from!.slice(0, 6)}...${log.args.from!.slice(-4)}`,
-                to: `${log.args.to!.slice(0, 6)}...${log.args.to!.slice(-4)}`,
+                transactionId: log.transactionHash,
+                from: log.args.from!,
+                to: log.args.to!,
                 amount: formatUnits(log.args.value!, decimals),
                 date: new Date(Number(block.timestamp) * 1000).toLocaleString(),
                 blockNumber: log.blockNumber,
