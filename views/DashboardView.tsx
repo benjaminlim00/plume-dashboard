@@ -8,7 +8,8 @@ import { useVaults } from "../lib/useVaults"
 import { plume } from "../lib/wagmi"
 import { useEffect } from "react"
 
-const formatAddress = (addr: string) => {
+const formatAddress = (addr?: string) => {
+  if (!addr) return ""
   return `${addr.slice(0, 6)}...${addr.slice(-4)}`
 }
 

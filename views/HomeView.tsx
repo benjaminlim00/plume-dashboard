@@ -15,8 +15,9 @@ const HomeView: React.FC = () => {
   useEffect(() => {
     if (isConnected) {
       router.push("/dashboard")
+    } else {
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }, [isConnected, router])
 
   const handleConnectWallet = () => {
