@@ -40,14 +40,13 @@ export const useVaults = () => {
   } = useQuery({
     queryKey: ["vaults"],
     queryFn: async (): Promise<VaultData[]> => {
-      const response = await fetch("https://app.nest.credit/api/vaults")
+      const response = await fetch("/api/vaults")
       if (!response.ok) {
         throw new Error("Failed to fetch vault data")
       }
       return response.json()
     },
-    staleTime: 0, // always considered stale
-    refetchInterval: 5000, // refetch every 5 seconds
+    refetchInterval: 10000, // refetch every 10 seconds
   })
 
   const alphaVault = vaults?.find((vault) => vault.name === "Nest Alpha Vault")
