@@ -3,22 +3,36 @@
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useConnect, useAccount } from "wagmi"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { injected } from "wagmi/connectors"
 
 const HomeView: React.FC = () => {
   const router = useRouter()
   const { isConnected } = useAccount()
   const { connect, isPending } = useConnect()
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     if (isConnected) {
       router.push("/dashboard")
     }
+    setIsLoading(false)
   }, [isConnected, router])
 
   const handleConnectWallet = () => {
     connect({ connector: injected() })
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-[#F9FAFB]">
+        <div
+          className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"
+          role="status"
+          aria-label="Loading wallet connection"
+        />
+      </div>
+    )
   }
 
   return (

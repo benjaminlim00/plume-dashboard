@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { Address, erc20Abi, formatUnits } from "viem"
-import { useReadContract } from "wagmi"
+import { useAccount, useReadContract } from "wagmi"
 
 export interface VaultData {
   vaultStatus: string
@@ -49,6 +49,8 @@ export const useVaults = () => {
     refetchInterval: 10000, // refetch every 10 seconds
   })
 
+  const { address: userAddress } = useAccount()
+
   const alphaVault = vaults?.find((vault) => vault.name === "Nest Alpha Vault")
   const treasuryVault = vaults?.find(
     (vault) => vault.name === "Nest Treasury Vault"
@@ -72,9 +74,9 @@ export const useVaults = () => {
     address: alphaAddress,
     abi: erc20Abi,
     functionName: "balanceOf",
-    args: [alphaAddress!],
+    args: [userAddress!],
     query: {
-      enabled: !!alphaAddress,
+      enabled: !!alphaAddress && !!userAddress,
     },
   })
 
@@ -84,9 +86,9 @@ export const useVaults = () => {
       address: treasuryAddress,
       abi: erc20Abi,
       functionName: "balanceOf",
-      args: [treasuryAddress!],
+      args: [userAddress!],
       query: {
-        enabled: !!treasuryAddress,
+        enabled: !!treasuryAddress && !!userAddress,
       },
     }
   )
@@ -110,6 +112,7 @@ export const useVaults = () => {
       : "0"
 
   const balanceLoading =
+    !userAddress ||
     alphaLoading ||
     treasuryLoading ||
     !decimals ||
@@ -118,17 +121,6 @@ export const useVaults = () => {
     isLoading
 
   return {
-    // vaults: {
-    //   nALPHA: alphaVault,
-    //   nTBILL: treasuryVault,
-    // },
-    // addresses,
-    // prices,
-    // totalTokenBalance,
-    // totalBalanceUSD,
-    // balanceLoading,
-    // isLoading,
-    // error,
     vaultLoading: isLoading,
     totalTokenBalance,
     totalBalanceUSD,
