@@ -103,19 +103,7 @@ const DashboardView: React.FC = () => {
           {/* Total Balance */}
           <div className="mt-4 flex items-center">
             <div className="mr-2 h-6 w-6">
-              <svg viewBox="0 0 24 24" className="h-full w-full">
-                <circle cx="12" cy="12" r="10" fill="#0D9488" />
-                <text
-                  x="12"
-                  y="16"
-                  textAnchor="middle"
-                  fill="white"
-                  fontSize="10"
-                  fontWeight="bold"
-                >
-                  $
-                </text>
-              </svg>
+              <Image src="/token.png" alt="Nest token" width={24} height={24} />
             </div>
             <span className="text-3xl font-bold">
               {balanceLoading

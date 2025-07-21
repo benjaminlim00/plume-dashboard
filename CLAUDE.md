@@ -15,7 +15,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Testing
 
-No test framework is currently configured in this project.
+- `npm run test` - Run Jest unit tests
+- `npm run test:watch` - Run Jest tests in watch mode
+- `npm run test:coverage` - Run tests with coverage report
+- `npm run test:ci` - Run tests in CI mode with coverage
+- `npm run test:e2e` - Run Playwright E2E tests for wallet connection
 
 ## Project Architecture
 
