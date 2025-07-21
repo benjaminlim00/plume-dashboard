@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { useAccount } from "wagmi"
 import { useTransactions } from "../lib/useTransactions"
 import { useVaults } from "../lib/useVaults"
+import { useEffect } from "react"
 
 const DashboardView: React.FC = () => {
   const { address, isConnected } = useAccount()
@@ -23,17 +24,22 @@ const DashboardView: React.FC = () => {
   const { transactions, transactionsLoading, transactionsError } =
     useTransactions(address, addresses, decimals)
 
-  if (!isConnected || !address) {
-    router.push("/")
-    return null
-  }
+  useEffect(() => {
+    if (!isConnected || !address) {
+      router.push("/")
+    }
+  }, [isConnected, address, router])
 
   // Show loading spinner while fetching vault data
   if (vaultLoading) {
     return (
       <div className="flex h-screen items-center justify-center bg-[#F9FAFB]">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
+          <div
+            className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"
+            role="status"
+            aria-label="Loading vault data"
+          ></div>
           <p className="text-sm text-gray-600">Loading vault data...</p>
         </div>
       </div>
@@ -135,7 +141,11 @@ const DashboardView: React.FC = () => {
           {transactionsLoading ? (
             <div className="flex items-center justify-center py-8">
               <div className="flex items-center gap-3">
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600"></div>
+                <div
+                  className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600"
+                  role="status"
+                  aria-label="Loading transactions"
+                ></div>
                 <span className="text-sm text-[#71717A]">
                   Loading transactions...
                 </span>
