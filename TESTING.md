@@ -139,7 +139,6 @@ e2e/
 ### Next.js Mocking
 
 - **Router**: Mock navigation functions
-- **Image component**: Mock Next.js Image for testing
 - **API routes**: Mock internal API endpoints
 
 ## Test Configuration
@@ -176,8 +175,6 @@ npm run test:ci            # Run in CI mode
 
 ```bash
 npm run test:e2e           # Run Playwright tests
-npm run test:e2e:ui        # Run with UI mode
-npm run test:e2e:debug     # Run in debug mode
 ```
 
 ## Coverage Goals
@@ -242,31 +239,6 @@ The test suite is designed for CI/CD integration with:
 - **Coverage reporting**: Automated coverage analysis
 - **Multiple environments**: Browser and Node.js testing
 
-## Security Testing
-
-### Defensive Security Measures
-
-- **Input sanitization**: Test XSS prevention
-- **API security**: Test error message information leakage
-- **Wallet security**: Test private key handling (read-only operations)
-- **Network security**: Validate HTTPS endpoints only
-
-## Maintenance
-
-### Test Maintenance Strategy
-
-- **Regular updates**: Keep mocks synchronized with real APIs
-- **Dependency updates**: Update testing libraries regularly
-- **Performance monitoring**: Track test execution times
-- **Coverage monitoring**: Maintain high coverage standards
-
-### Adding New Tests
-
-1. **New features**: Add tests alongside feature development
-2. **Bug fixes**: Add regression tests for fixed issues
-3. **Mock updates**: Update mocks when external APIs change
-4. **Documentation**: Update this document with new test patterns
-
 ## Troubleshooting
 
 ### Common Issues
@@ -277,12 +249,5 @@ The test suite is designed for CI/CD integration with:
 4. **E2E test flakiness**: Add appropriate wait conditions
 5. **Utils files treated as tests**: Add utils directory to `testPathIgnorePatterns`
 6. **Missing accessibility roles**: Add `role="status"` to loading spinners
-
-### Debug Tips
-
-- Use `screen.debug()` in React Testing Library tests
-- Use `--debug` flag for Playwright tests
-- Check network tab in browser for API calls
-- Verify mock setup in test setup files
 
 This comprehensive testing suite ensures the Plume DeFi application is robust, secure, and user-friendly across all supported platforms and use cases.
