@@ -1,12 +1,13 @@
 "use client"
 
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useAccount } from "wagmi"
 import { useTransactions } from "../lib/useTransactions"
 import { useVaults } from "../lib/useVaults"
 import { plume } from "../lib/wagmi"
 import { useEffect } from "react"
+import Loading from "../components/Loading"
 
 const formatAddress = (addr?: string) => {
   if (!addr) return ""
@@ -34,6 +35,10 @@ const DashboardView: React.FC = () => {
   const { transactions, transactionsLoading, transactionsError } =
     useTransactions(address, addresses, decimals)
 
+  const searchParams = useSearchParams()
+  const from = searchParams.get("from")
+  const isFromMatrix = from === "matrix"
+
   useEffect(() => {
     if (!isConnected || !address) {
       router.push("/")
@@ -42,6 +47,8 @@ const DashboardView: React.FC = () => {
 
   // Show loading spinner while fetching vault data
   if (vaultLoading) {
+    if (isFromMatrix) return <Loading />
+
     return (
       <div className="flex h-screen items-center justify-center bg-[#F9FAFB]">
         <div className="flex flex-col items-center gap-4">
