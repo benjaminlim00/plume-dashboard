@@ -94,9 +94,6 @@ const HomeViewMatrix: React.FC = () => {
         ))}
       </div>
 
-      {/* Matrix digital overlay */}
-      <div className="bg-gradient-radial absolute inset-0 from-green-900/20 via-black to-black" />
-
       {/* Main container with matrix styling */}
       {/* //NOTE: control height here */}
       <div className="relative z-10 mx-4 flex h-[333px] w-[650px] max-w-[90vw] flex-col gap-8 border-2 border-green-500/50 bg-black/95 p-8 text-center font-mono shadow-[0_0_50px_rgba(34,197,94,0.3)] md:h-[400px] md:gap-8">
