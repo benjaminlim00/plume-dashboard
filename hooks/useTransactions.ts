@@ -6,7 +6,7 @@ import {
   formatUnits,
   Address,
 } from "viem"
-import { plume } from "./wagmi"
+import { plume } from "../lib/wagmi"
 
 const publicClient = createPublicClient({
   chain: plume,

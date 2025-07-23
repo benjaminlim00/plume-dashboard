@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react"
 import { useQuery } from "@tanstack/react-query"
 import { useReadContract } from "wagmi"
-import { useVaults } from "../../lib/useVaults"
+import { useVaults } from "../../hooks/useVaults"
 
 // Mock vault data for testing
 const MOCK_VAULT_DATA = [

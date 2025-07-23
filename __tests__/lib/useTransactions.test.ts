@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react"
 import { useQuery } from "@tanstack/react-query"
-import { useTransactions } from "../../lib/useTransactions"
+import { useTransactions } from "../../hooks/useTransactions"
 
 // Mock addresses for testing
 const MOCK_ADDRESSES = {

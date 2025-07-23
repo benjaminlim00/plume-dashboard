@@ -2,8 +2,8 @@ import React from "react"
 import { render, screen } from "../utils/test-utils"
 import { useRouter } from "next/navigation"
 import { useAccount } from "wagmi"
-import { useTransactions } from "../../lib/useTransactions"
-import { useVaults } from "../../lib/useVaults"
+import { useTransactions } from "../../hooks/useTransactions"
+import { useVaults } from "../../hooks/useVaults"
 import DashboardView from "../../views/DashboardView"
 // Mock addresses for testing
 const MOCK_ADDRESSES = {
